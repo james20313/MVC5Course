@@ -44,12 +44,24 @@ namespace MVC5Course.Controllers
         [HttpPost]
         public ActionResult AddNewProduct(ProductViewModel data)
         {
-            if(!ModelState.IsValid)
+            if (!ModelState.IsValid)
             {
                 return View();
             }
 
             //寫入資料位置
+            var product = new Product()
+            {
+                ProductId = data.ProductId,
+                Active = true,
+                Price = data.Price,
+                Stock = data.Stock,
+                ProductName=data.ProductName
+            };
+
+
+            this.db.Product.Add(product);
+            this.db.SaveChanges();
 
             return RedirectToAction("Index_Product");
         }
