@@ -32,9 +32,26 @@ namespace MVC5Course.Controllers
                     ProductId = p.ProductId,
                     Price = p.Price,
                     Stock = p.Stock
-                })
-                ;
+                });
             return View(data);
+        }
+
+        public ActionResult AddNewProduct()
+        {
+            return View();
+        }
+
+        [HttpPost]
+        public ActionResult AddNewProduct(ProductViewModel data)
+        {
+            if(!ModelState.IsValid)
+            {
+                return View();
+            }
+
+            //寫入資料位置
+
+            return RedirectToAction("Index_Product");
         }
 
         // GET: Products/Details/5
