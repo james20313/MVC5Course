@@ -57,7 +57,7 @@ namespace MVC5Course.Controllers
                 Active = true,
                 Price = data.Price,
                 Stock = data.Stock,
-                ProductName=data.ProductName
+                ProductName = data.ProductName
             };
 
 
@@ -69,18 +69,19 @@ namespace MVC5Course.Controllers
 
         public ActionResult UpdateProduct(int id)
         {
-            var data = db.Product.Find(id);
+            //var data = db.Product.Find(id);
+            var data = db.Product.FirstOrDefault(p => p.ProductId == id);
             return View(data);
         }
 
         [HttpPost]
-        public ActionResult UpdateProduct(int id,ProductViewModel data)
+        public ActionResult UpdateProduct(int id, ProductViewModel data)
         {
-            if(!ModelState.IsValid)
+            if (!ModelState.IsValid)
             {
                 return View(data);
             }
-            
+
             var one = db.Product.Find(id);
 
             one.InjectFrom(data);
@@ -89,6 +90,28 @@ namespace MVC5Course.Controllers
             //one.Stock = data.Stock;
             //one.Price = data.Price;
 
+            db.SaveChanges();
+
+            return RedirectToAction("Index_Product");
+
+        }
+
+        public ActionResult DeleteProject(int id)
+        {
+            var data = db.Product.FirstOrDefault(p => p.ProductId == id);
+            if (data == null)
+            {
+                return HttpNotFound();
+            }
+            return View(data);
+        }
+
+        [HttpPost]
+        public ActionResult DeleteProject(int id, ProductViewModel data)
+        {
+            var one = db.Product.Find(id);
+
+            db.Product.Remove(one);
             db.SaveChanges();
 
             return RedirectToAction("Index_Product");
