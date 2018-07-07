@@ -17,8 +17,23 @@ namespace MVC5Course.Controllers
         // GET: Products
         public ActionResult Index()
         {
-            var data = db.Product.OrderByDescending(p=>p.ProductId)
+            var data = db.Product.OrderByDescending(p => p.ProductId)
                 .Take(10).ToList();
+            return View(data);
+        }
+
+        public ActionResult Index_Product()
+        {
+            var data = db.Product.OrderByDescending(p => p.ProductId)
+                .Take(10).ToList()
+                .Select(p => new ProductViewModel()
+                {
+                    ProductName = p.ProductName,
+                    ProductId = p.ProductId,
+                    Price = p.Price,
+                    Stock = p.Stock
+                })
+                ;
             return View(data);
         }
 
