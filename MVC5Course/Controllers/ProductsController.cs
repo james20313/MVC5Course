@@ -60,10 +60,35 @@ namespace MVC5Course.Controllers
             };
 
 
-            this.db.Product.Add(product);
-            this.db.SaveChanges();
+            db.Product.Add(product);
+            db.SaveChanges();
 
             return RedirectToAction("Index_Product");
+        }
+
+        public ActionResult UpdateProduct(int id)
+        {
+            var data = db.Product.Find(id);
+            return View(data);
+        }
+
+        [HttpPost]
+        public ActionResult UpdateProduct(int id,ProductViewModel data)
+        {
+            if(!ModelState.IsValid)
+            {
+                return View(data);
+            }
+
+            var one = db.Product.Find(id);
+            one.ProductName = data.ProductName;
+            one.Stock = data.Stock;
+            one.Price = data.Price;
+
+            db.SaveChanges();
+
+            return RedirectToAction("Index_Product");
+
         }
 
         // GET: Products/Details/5
