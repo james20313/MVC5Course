@@ -1,14 +1,23 @@
 namespace MVC5Course.Models
 {
+    using MVC5Course.Models.InputValidations;
     using System;
     using System.Collections.Generic;
     using System.ComponentModel.DataAnnotations;
     
     [MetadataType(typeof(ClientMetaData))]
-    public partial class Client
+    public partial class Client : IValidatableObject
     {
+        public IEnumerable<ValidationResult> Validate(ValidationContext validationContext)
+        {
+            if (this.ClientId == 0) { }  //此處用在Create
+            if(this.Latitude.HasValue!=this.Longitude.HasValue)
+            {
+                yield return new ValidationResult("經緯度資料必須一起輸入", new String[] { "Latitude", "Longitude" });
+            }
+        }
     }
-    
+
     public partial class ClientMetaData
     {
         [Required]
@@ -25,6 +34,8 @@ namespace MVC5Course.Models
         
         [StringLength(1, ErrorMessage="欄位長度不得大於 1 個字元")]
         public string Gender { get; set; }
+        [DisplayFormat(ApplyFormatInEditMode = true, DataFormatString = "{0:yyyy-MM-dd}")]
+        [DataType(DataType.Date)]
         public Nullable<System.DateTime> DateOfBirth { get; set; }
         public Nullable<double> CreditRating { get; set; }
         
@@ -52,5 +63,8 @@ namespace MVC5Course.Models
     
         public virtual Occupation Occupation { get; set; }
         public virtual ICollection<Order> Order { get; set; }
+
+        [身份證字號]
+        public string IdNumber { get; set; }
     }
 }
