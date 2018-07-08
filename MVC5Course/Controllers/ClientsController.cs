@@ -10,6 +10,7 @@ using MVC5Course.Models;
 
 namespace MVC5Course.Controllers
 {
+    [RoutePrefix("JamesHAHA")]
     public class ClientsController : Controller
     {
         //private FabricsEntities db = new FabricsEntities();
@@ -24,6 +25,7 @@ namespace MVC5Course.Controllers
         }
 
         // GET: Clients
+        [Route("Index")]
         public ActionResult Index()
         {
             var client = repo.All();
