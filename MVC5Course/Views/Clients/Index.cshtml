@@ -34,40 +34,13 @@
         <th>
             @Html.DisplayNameFor(model => model.CreditRating)
         </th>
-        <th>
-            @Html.DisplayNameFor(model => model.XCode)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.TelephoneNumber)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.Street1)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.Street2)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.City)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.ZipCode)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.Longitude)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.Latitude)
-        </th>
-        @*<th>
-                @Html.DisplayNameFor(model => model.Notes)
-            </th>*@
+        
         <th>
             @Html.DisplayNameFor(model => model.IdNumber)
         </th>
         <th>
-            @Html.DisplayNameFor(model => model.Occupation.OccupationName)
+            @Html.DisplayNameFor(model => model.isDelete)
         </th>
-        <th></th>
     </tr>
 
     @foreach (var item in Model)
@@ -92,37 +65,10 @@
                 @Html.DisplayFor(modelItem => item.CreditRating)
             </td>
             <td>
-                @Html.DisplayFor(modelItem => item.XCode)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.TelephoneNumber)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Street1)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Street2)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.City)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.ZipCode)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Longitude)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Latitude)
-            </td>
-            @*<td>
-                    @Html.DisplayFor(modelItem => item.Notes)
-                </td>*@
-            <td>
                 @Html.DisplayFor(modelItem => item.IdNumber)
             </td>
             <td>
-                @Html.DisplayFor(modelItem => item.Occupation.OccupationName)
+                @Html.DisplayFor(modelItem => item.isDelete)
             </td>
             <td>
                 @Html.ActionLink("Edit", "Edit", new { id = item.ClientId }) |

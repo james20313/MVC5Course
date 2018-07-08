@@ -64,6 +64,8 @@ namespace MVC5Course.Models
         public virtual Occupation Occupation { get; set; }
         public virtual ICollection<Order> Order { get; set; }
 
+        public Nullable<bool> isDelete { get; set; }
+
         [身份證字號]
         public string IdNumber { get; set; }
     }

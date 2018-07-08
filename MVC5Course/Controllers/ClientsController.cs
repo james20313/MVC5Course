@@ -13,7 +13,15 @@ namespace MVC5Course.Controllers
     public class ClientsController : Controller
     {
         //private FabricsEntities db = new FabricsEntities();
-        ClientRepository repo = RepositoryHelper.GetClientRepository();
+        ClientRepository repo;
+        OccupationRepository occuRepo;
+
+        public ClientsController()
+        {
+            repo = RepositoryHelper.GetClientRepository();
+            occuRepo = RepositoryHelper.GetOccupationRepository(repo.UnitOfWork);
+
+        }
 
         // GET: Clients
         public ActionResult Index()
@@ -46,7 +54,6 @@ namespace MVC5Course.Controllers
         // GET: Clients/Create
         public ActionResult Create()
         {
-            var occuRepo = RepositoryHelper.GetOccupationRepository();
             ViewBag.OccupationId = new SelectList(occuRepo.All(), "OccupationId", "OccupationName");
             return View();
         }
@@ -65,7 +72,6 @@ namespace MVC5Course.Controllers
                 return RedirectToAction("Index");
             }
 
-            var occuRepo = RepositoryHelper.GetOccupationRepository();
             ViewBag.OccupationId = new SelectList(occuRepo.All(), "OccupationId", "OccupationName", client.OccupationId);
             return View(client);
         }
@@ -82,7 +88,6 @@ namespace MVC5Course.Controllers
             {
                 return HttpNotFound();
             }
-            var occuRepo = RepositoryHelper.GetOccupationRepository();
             ViewBag.OccupationId = new SelectList(occuRepo.All(), "OccupationId", "OccupationName", client.OccupationId);
             return View(client);
         }
@@ -101,7 +106,6 @@ namespace MVC5Course.Controllers
                 db.SaveChanges();
                 return RedirectToAction("Index");
             }
-            var occuRepo = RepositoryHelper.GetOccupationRepository();
             ViewBag.OccupationId = new SelectList(occuRepo.All(), "OccupationId", "OccupationName", client.OccupationId);
             return View(client);
         }

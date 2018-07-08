@@ -30,6 +30,11 @@ namespace MVC5Course.Models
 
             return client;
         }
+
+        public override void Delete(Client data)
+        {
+            data.isDelete = true;
+        }
     }
 
 	public  interface IClientRepository : IRepository<Client>

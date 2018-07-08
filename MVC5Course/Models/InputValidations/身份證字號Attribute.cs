@@ -23,7 +23,11 @@ namespace MVC5Course.Models.InputValidations
         public bool isIdentificationId(string arg_Identify)
         {
             var d = false;
-            if (arg_Identify.Length == 10)
+            if(String.IsNullOrEmpty(arg_Identify))
+            {
+                d = true;
+            }
+            else if (arg_Identify.Length == 10)
             {
                 arg_Identify = arg_Identify.ToUpper();
                 if (arg_Identify[0] >= 0x41 && arg_Identify[0] <= 0x5A)
