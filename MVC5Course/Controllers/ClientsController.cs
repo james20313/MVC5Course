@@ -11,7 +11,7 @@ using MVC5Course.Models;
 namespace MVC5Course.Controllers
 {
     [RoutePrefix("JamesHAHA")]
-    public class ClientsController : Controller
+    public class ClientsController : BaseController
     {
         //private FabricsEntities db = new FabricsEntities();
         ClientRepository repo;
@@ -53,7 +53,7 @@ namespace MVC5Course.Controllers
             return View(client);
         }
 
-        [Route("{*name}")]
+        //[Route("{*name}")]
         public ActionResult Details2(string name)
         {
             string[] names = name.Split('/');
