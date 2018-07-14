@@ -147,6 +147,8 @@ namespace MVC5Course.Controllers
         {
             if (ModelState.IsValid)
             {
+                //下方三段程式寫得很爛
+                //把沒有修改的欄位也一起更新進DB了
                 var db = repo.UnitOfWork.Context;
                 db.Entry(client).State = EntityState.Modified;
                 db.SaveChanges();
