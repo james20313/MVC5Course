@@ -25,5 +25,19 @@ namespace MVC5Course.Controllers
             String model = "Partial My Data";
             return PartialView("ViewTest",(object)model);
         }
+
+        public ActionResult FileTest(string dl)
+        {
+            if(String.IsNullOrEmpty(dl))
+            {
+                return File(Server.MapPath("~/App_Data/Football.jpeg"),
+                    "image/jpeg");
+            }
+            else
+            {
+                return File(Server.MapPath("~/App_Data/Football.jpeg"),
+                    "image/jpeg", "FIFA-Ball-Picture.jpg");
+            }
+        }
     }
 }
