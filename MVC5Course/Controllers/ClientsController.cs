@@ -143,15 +143,16 @@ namespace MVC5Course.Controllers
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit([Bind(Include = "ClientId,FirstName,MiddleName,LastName,Gender,DateOfBirth,CreditRating,XCode,OccupationId,TelephoneNumber,Street1,Street2,City,ZipCode,Longitude,Latitude,Notes,IdNumber")] Client client)
+        public ActionResult Edit(int id, FormCollection form)
         {
-            if (ModelState.IsValid)
+            //FormCollection form  <==不使用
+
+            var client = repo.Find(id);
+
+
+            if (TryUpdateModel(client, "", null, new string[] { "FirstName" }))
             {
-                //下方三段程式寫得很爛
-                //把沒有修改的欄位也一起更新進DB了
-                var db = repo.UnitOfWork.Context;
-                db.Entry(client).State = EntityState.Modified;
-                db.SaveChanges();
+                repo.UnitOfWork.Commit();
                 return RedirectToAction("Index");
             }
             ViewBag.OccupationId = new SelectList(occuRepo.All(), "OccupationId", "OccupationName", client.OccupationId);
