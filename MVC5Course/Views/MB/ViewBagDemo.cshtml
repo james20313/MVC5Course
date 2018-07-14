@@ -1,8 +1,15 @@
 ﻿@{
     ViewBag.Title = "ViewBagDemo";
+
+    var data = ViewBag.Data;
 }
 
 <h2>@ViewBag.Text</h2>
 
 <h2>ViewBagDemo: @ViewBag.Text</h2>
 <h2>ViewBagDemo: @ViewData["Text"]</h2>
+
+@foreach (var item in data)
+{
+    <li>@item.FirstName</li>
+}
